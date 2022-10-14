@@ -36,14 +36,13 @@ let [userLogin,setUserLogin] = useState(getTokenDetails());
     .then(()=>
     { 
       window.location.reload();
-
-    })
+    });
     
     // alert('user login successfully');
   };
 
   
-  let onError =() =>{
+  let onError = () =>{
     // alert("Login fail");
     Swal.fire({
       icon: 'error',
@@ -91,7 +90,6 @@ let [userLogin,setUserLogin] = useState(getTokenDetails());
         onerror={onError}
         />
       </div>
-     
     </div>
   </div>
 </div>
