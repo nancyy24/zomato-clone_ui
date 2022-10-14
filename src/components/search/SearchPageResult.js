@@ -17,7 +17,7 @@ function SearchPageResult(){
 
     let getLocationList = async()=>{
       try{
-          let response = await axios.get("http://localhost:5000/api/get-location")
+          let response = await axios.get("https://zomato-clone-48.herokuapp.com/api/get-location")
           let data =response.data;
           // console.log(data);
           if(data.status === true){
@@ -40,7 +40,7 @@ function SearchPageResult(){
 
     let filterOperation = async (filter) =>
     {
-      let URL = "http://localhost:5000/api/filter";
+      let URL = "https://zomato-clone-48.herokuapp.com/api/filter";
      
       try{
       let response = await axios.post(URL,filter)

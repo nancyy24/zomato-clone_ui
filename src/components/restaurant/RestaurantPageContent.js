@@ -44,7 +44,7 @@ function RestaurantPageContent() {
         let {id} = useParams();
         let getRestaurantDetails = async()=>{
           try{
-          let URL = "http://localhost:5000/api/get-restaurant-details-by-id/"+id;
+          let URL = "https://zomato-clone-48.herokuapp.com/api/get-restaurant-details-by-id/"+id;
           let response = await axios.get(URL);
           let data = response.data;
           // console.log(data);
@@ -73,7 +73,7 @@ function RestaurantPageContent() {
         let getMenuItems = async()=>
         {
           try{
-            let URL = "http://localhost:5000/api/get-menu-item-list-by-restaurant-id/"+id;
+            let URL = "https://zomato-clone-48.herokuapp.com/api/get-menu-item-list-by-restaurant-id/"+id;
             let {data} = await axios.get(URL);
             if(data.status === true)
             {
@@ -147,7 +147,7 @@ function RestaurantPageContent() {
           amount:totalPrices
         }
         var {data} = await axios.post(
-          "http://localhost:5000/api/payment/gen-order",serverData
+          "https://zomato-clone-48.herokuapp.com/api/payment/gen-order",serverData
         );
         // console.log(data);
         // return false;
@@ -167,7 +167,7 @@ var options = {
       razorpay_order_id : response.razorpay_order_id,
       razorpay_signature : response.razorpay_signature
       };
-      var {data} = await axios.post("http://localhost:5000/api/payment/verify",sendData);
+      var {data} = await axios.post("https://zomato-clone-48.herokuapp.com/api/payment/verify",sendData);
       // console.log(data);
       if(data.status === true)
       {

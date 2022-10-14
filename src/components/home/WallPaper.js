@@ -12,7 +12,7 @@ function WallPaper(){
 
     let getLocationList = async()=>{
     try{
-        let response = await axios.get("http://localhost:5000/api/get-location")
+        let response = await axios.get("https://zomato-clone-48.herokuapp.com/api/get-location")
         let data =response.data;
         // console.log(data);
         if(data.status === true){
@@ -38,7 +38,7 @@ function WallPaper(){
         // console.log(value_data);
         if(value_data !== "")
         {   try{
-            let response =  await axios.get(`http://localhost:5000/api/get-restaurant-by-location-id/${value_data}`);
+            let response =  await axios.get(`https://zomato-clone-48.herokuapp.com/api/get-restaurant-by-location-id/${value_data}`);
             let data = response.data;
             console.log(data);
             console.log(data.result);

@@ -10,7 +10,7 @@ function QuickSearch(){
     
     let getMealTypes = async() =>{
     try{
-    let  response = await axios.get("http://localhost:5000/api/get-meal-types");
+    let  response = await axios.get("https://zomato-clone-48.herokuapp.com/api/get-meal-types");
     // console.log(response);
     // console.log(response.data);
     let data= response.data;
