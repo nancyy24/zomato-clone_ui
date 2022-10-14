@@ -89,8 +89,7 @@ let [userLogin,setUserLogin] = useState(getTokenDetails());
       <div class="modal-body">
         <GoogleLogin onSuccess ={onSuccess}
         onerror={onError}
-        
-        />;
+        />
       </div>
      
     </div>
