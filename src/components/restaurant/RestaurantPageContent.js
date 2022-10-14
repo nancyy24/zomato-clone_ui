@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import jwt_decode from "jwt-decode"
 import Swal from "sweetalert2";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel} from "react-responsive-carousel";
 
 
 
@@ -212,6 +214,27 @@ useEffect(() =>{
   return (
 
     <>
+    {/* Carousel */}
+    <div className="modal fade" id ="slideShow" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div className="modal-dialog modal-lg" style={{ height :"75vh"}}>
+    <div className="modal-content">
+      <div className="modal-body h-75">
+      <Carousel showThumbs={false} infiniteLoop={true}>
+      {
+        restaurant.thumb.map((value,index) => {
+          return (<div key={index} className="w-120">
+                <img src={"/Images/"+value} />
+          </div>);
+        })
+      }
+
+      </Carousel>
+
+      </div>
+      </div>
+    </div>
+
+    </div>
     <div className="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabIndex="-1">
   <div className="modal-dialog modal-dialog-centered">
     <div className="modal-content">
@@ -312,7 +335,7 @@ useEffect(() =>{
           alt=""
           className="col-11 my-3 restaurantimg"
         />
-        <button className="btn btn-outline-white fw-bold col-6 col-sm-5 col-md-4 col-lg-3  gallerybutton">
+        <button className="btn btn-outline-white fw-bold col-6 col-sm-5 col-md-4 col-lg-3  gallerybutton" data-bs-toggle="modal" data-bs-target="#slideShow">
           Click to see Image Gallery
         </button>
       </section>
