@@ -13,7 +13,10 @@ function SearchPageResult(){
     let navigate = useNavigate();
     let [restaurantList , setRestaurantList] = useState([]);
     let [locationList,setLocationList] = useState([]);
-    let [filter,setFilter] = useState({meal_type : meal_id})
+    let [filter,setFilter] = useState({meal_type : meal_id});
+    let [increaseValue,setIncreaseValue] = useState(2)
+    let [decreaseValue,setdecreaseValue] = useState(1);
+    let [cuisineOrder,setCuisineOrder] = useState([]);
 
     let getLocationList = async()=>{
       try{
@@ -65,6 +68,13 @@ function SearchPageResult(){
 
     let makeFiltration = (event,type) =>{
       let value = event.target.value;
+      console.log(value);
+      let ischecked= event.target.checked;
+      console.log(ischecked);
+      // console.log(event);
+      // console.log( value);
+      let cuisine=[];
+     
       // let filter = {
       //   meal_type :meal_id
       // }
@@ -85,6 +95,31 @@ function SearchPageResult(){
           filter["lcost"] = Number(costForTwo[0]);
           filter["hcost"] = Number(costForTwo[1]);
           break;
+          case "page":
+            filter["page"] = Number(value);
+            break;
+          case "cuisine":
+            // cuisine.push(Number(value));
+            if(ischecked === false)
+            {
+               let index = cuisineOrder.indexOf(Number(value));
+              cuisineOrder.splice(index, 1);
+              setCuisineOrder(cuisineOrder);
+            }
+            else{
+              cuisine.push(Number(value));
+            cuisineOrder.push(...cuisine);
+            setCuisineOrder([...new Set(cuisineOrder)])
+            console.log([...new Set(cuisineOrder)])
+  
+            }
+    
+  
+            // console.log(cuisine);
+            // setCuisineOrder();
+            // console.log(cuisineOrder);
+            filter["cuisine"] = cuisineOrder;
+  
 
       }
       setFilter(filter);
@@ -129,23 +164,28 @@ function SearchPageResult(){
               {/* <!-- cuisine --> */}
               <p className="m-0 mt-4 mb-2 fw-bold">Cuisine</p>
               <div className="form-check">
-                <input type="checkbox" className="form-check-input" />
+                <input type="checkbox" className="form-check-input" value="1"
+                  onChange={(event) => {makeFiltration(event,"cuisine")}} />
                 <label className="form-check-label text-black fw-bold">North Indian</label>
               </div>
               <div className="form-check">
-                <input type="checkbox" className="form-check-input" checked />
+                <input type="checkbox" className="form-check-input" value="2"
+                  onChange={(event) => {makeFiltration(event,"cuisine")}}/>
                 <label className="form-check-label text-black fw-bold ">South Indian</label>
               </div>
               <div className="form-check">
-                <input type="checkbox" className="form-check-input" checked />
+                <input type="checkbox" className="form-check-input" value="3"
+                  onChange={(event) => {makeFiltration(event,"cuisine")}} />
                 <label className="form-check-label text-black fw-bold">Chinese</label>
               </div>
               <div className="form-check">
-                <input type="checkbox" className="form-check-input" />
+                <input type="checkbox" className="form-check-input" value="4"
+                  onChange={(event) => {makeFiltration(event,"cuisine")}} />
                 <label className="form-check-label text-black fw-bold">Fast Food</label>
               </div>
               <div className="form-check">
-                <input type="checkbox" className="form-check-input" />
+                <input type="checkbox" className="form-check-input" value="5"
+                  onChange={(event) => {makeFiltration(event,"cuisine")}}/>
                 <label className="form-check-label text-black fw-bold">Street Food</label>
               </div>
               {/* <!-- cost --> */}
@@ -227,13 +267,35 @@ function SearchPageResult(){
               <div className="row mt-4">
                 <div className="col-12 justify-content-center d-flex">
                   <ul className="pagination">
-                    <li className="page-item group-item">&lt;</li>
-                    <li className="page-item group-item">1</li>
-                    <li className="page-item group-item">2</li>
-                    <li className="page-item group-item">3</li>
-                    <li className="page-item group-item">4</li>
-                    <li className="page-item group-item">5</li>
-                    <li className="page-item group-item">&gt;</li>
+                    <li className="page-item group-item"  value={decreaseValue} 
+                    onClick={ (event) =>{  {  makeFiltration(event,"page");
+                                                 decreaseValue <= 1  ?
+                                                    ( setdecreaseValue(1) )
+                                                        : 
+                                                    (setdecreaseValue(decreaseValue-1))}
+                                                        }} >&lt;</li>
+                    <li className="page-item group-item" value="1" onClick={(event) =>{ makeFiltration(event,"page");
+                                                                                        setIncreaseValue(2);
+                                                                                        setdecreaseValue(0)}}>1</li>
+                    <li className="page-item group-item" value="2" onClick={(event) =>{ makeFiltration(event,"page");
+                                                                                        setIncreaseValue(3);
+                                                                                        setdecreaseValue(1)}
+                                                                                              }>2</li>
+                    <li className="page-item group-item" value="3" onClick={(event) =>{ makeFiltration(event,"page");
+                                                                                         setIncreaseValue(4);
+                                                                                         setdecreaseValue(2)}}>3</li>
+                    <li className="page-item group-item" value="4" onClick={(event) =>{ makeFiltration(event,"page");
+                                                                                          setIncreaseValue(5);
+                                                                                          setdecreaseValue(3)}}>4</li>
+                    <li className="page-item group-item" value="5" onClick={(event) =>{ makeFiltration(event,"page")
+                                                                                        }}>5</li>
+                    <li className="page-item group-item"  value={increaseValue} 
+                    onClick={ (event) =>{  {  makeFiltration(event,"page");
+                                                 increaseValue >= 5  ?
+                                                    ( setIncreaseValue(1) )
+                                                        : 
+                                                    (setIncreaseValue(increaseValue+1))}
+                                                        }}>&gt;</li>
                   </ul>
                 </div>
               </div>
