@@ -41,28 +41,28 @@
 .modal-dialog{
     height: 200px !important;
 }
-.set-location{
-    position:relative;
-    /* width: 15vw; */
-} 
-/* .set-location-list{
-    position:absolute;
+/* .set-location{
+    /* position:relative; */
+    /* width: 15vw;} */
+.set-location-list{
+    /* position:absolute; */
     width:100%;
     margin-top: 0.5rem;
     list-style: none;
     padding: 0px;
     border: 1px solid black;
     background-color: white;
-} */
-/* .set-bottom{
+    margin-bottom: 0px;
+}
+.set-bottom{
     border-bottom: 1px solid black;
     padding: 1px;
-} */
-/* .search-list-img{
+}
+.search-list-img{
     height: 40px;
     width:40px;
     border-radius: 20px;
-} */
+}
 @media screen and (max-width:576px)
 {
     .logo{

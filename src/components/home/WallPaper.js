@@ -10,6 +10,8 @@ function WallPaper(){
 
     let [disable,setDisable] = useState(true);
 
+    let [restList,setRestList] = useState([]);
+
     let getLocationList = async()=>{
     try{
         let response = await axios.get("https://zomato-clone-48.herokuapp.com/api/get-location")
@@ -39,17 +41,27 @@ function WallPaper(){
         if(value_data !== "")
         {   try{
             let response =  await axios.get(`https://zomato-clone-48.herokuapp.com/api/get-restaurant-by-location-id/${value_data}`);
-            let data = response.data;
-            console.log(data);
-            console.log(data.result);
+            let answer = response.data;
+            // console.log(answer);
+            // console.log("Answeer",data.result)
+            // setRestList([...data.result]);
+            // console.log(restList);
 
-            if(data.result.length === 0)
+            if (answer.result.length !== 0)
             {
-                setDisable(true);
+                setDisable(false);
+                setRestList( [...answer.result]);
+                console.log("restaurant list",restList);
             }
             else{
-                setDisable(false);
-            }
+
+                setRestList([]);
+                setDisable(true);
+                console.log("restaurant list",restList);
+
+
+        }
+       
         }
         catch(error)
         {    
@@ -63,11 +75,14 @@ function WallPaper(){
 
         }
         else{
-            setDisable(true);
+            setRestList([]);
+            setDisable(false);
         }
     }
     useEffect(() => {
-        getLocationList();
+
+        getLocationId()
+        getLocationList()
     },[]);
 
 
@@ -122,6 +137,20 @@ function WallPaper(){
                                 <span className="input-group-text"><i className="fa fa-search"></i></span>
                                 <input type="text" className="form-control p-3 p-sm-2" placeholder="Search for restaurants" disabled={disable} />
                             </div>
+                        {restList.length !== 0 ? (restList.map((rest,index) => { return ( <ul className="set-location-list  small">
+                            <li className="set-bottom p-2">
+                                    <div className="d-flex">
+                                        <img src={"Images/"+rest.image} className="search-list-img" />
+                                        <div className="ms-2">
+                                            <p className="m-0 h6 fw-bold ">{rest.name}</p>
+                                            <p className="m-0 small text-muted">{rest.locality},{rest.city}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                </ul>)
+                                })) : null }
+                         
+                            
                             {/* <!-- <ul className="set-location-list  small">
                                 <li className="set-bottom p-2">
                                     <div className="d-flex">
